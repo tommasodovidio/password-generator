@@ -1,4 +1,6 @@
-// Array of special characters to be included in the password
+// The javascript below will be used to generate a random password based on criteria the user selects.
+
+// Array of special characters to be included in password
 var specialCharacters = [
   '@',
   '%',
@@ -23,7 +25,7 @@ var specialCharacters = [
   '-',
   '_',
   '.',
-]
+];
 
 // Array of numeric characters to be included in password
 var numericCharacters = ['0','1','2','3','4','5','6','7','8','9'];
@@ -56,7 +58,7 @@ var lowerCasedCharacters = [
   'x',
   'y',
   'z'
-]
+];
 
 // Array of uppercase characters to be included in the password
 var upperCasedCharacters = [
@@ -86,10 +88,10 @@ var upperCasedCharacters = [
   'X',
   'Y',
   'Z'
-]
+];
 
 // Function to prompt user for password options
-function getPasswordOptions {
+function getPasswordOptions() {
   // Variable to store length of password from user input
   var length = parseInt(
     prompt('How many characters would you like your password to contain?')
@@ -97,19 +99,19 @@ function getPasswordOptions {
 
   // Condition statement to check if password length is a number. Prompts end if this evaluates false
   if (isNaN(length) === true) {
-    alert('Password length must be provided as a number')
+    alert('Password length must be provided as a number');
     return;
   }
 
   // Condition statement to check if password length is at least 8 characters long. Prompts end if this evaluates false
   if (length < 8) {
-    alert('Password length must be at least 8 characters')
+    alert('Password length must be at least 8 characters');
     return;
   }
 
   // Condition statement to check if password length is less than 128 characters long. Prompts end if this evaluates false
   if (length > 128) {
-    alert('Password length must be less than 129 characters')
+    alert('Password length must be less than 129 characters');
     return;
   }
 
@@ -133,14 +135,14 @@ function getPasswordOptions {
     'Click OK to confirm including lowercase characters'
   );
 
-  // Conditional statement to check if user does not include any type of characters. Password generator ends if all four variables evaluate to 
+  // Conditional statement to check if user does not include any type of characters.
   if (
     hasSpecialCharacters === false &&
     hasNumericCharacters === false &&
     hasUpperCasedCharacters === false &&
     hasLowerCasedCharacters === false 
   ) {
-    alert('Must select at least one character type')
+    alert('Must select at least one character type');
     return;
   }
 
@@ -151,7 +153,7 @@ function getPasswordOptions {
     hasNumericCharacters: hasNumericCharacters,
     hasUpperCasedCharacters: hasUpperCasedCharacters,
     hasLowerCasedCharacters: hasLowerCasedCharacters,
-  }
+  };
 
   return passwordOptions;
 }
@@ -180,45 +182,45 @@ function generatePassword() {
   // Push new random special character to guaranteedCharacters
   if (options.hasSpecialCharacters) {
     possibleCharacters = possibleCharacters.concat(specialCharacters);
-    guaranteedCharacters = push(getRandom(specialCharacters));
+    guaranteedCharacters.push(getRandom(specialCharacters));
   }
 
-  // Condition statement that adds array of special characters into array of possible characters based on user input
-  // Push new random special character to guaranteedCharacters
+  // Condition statement that adds array of numeric characters into array of possible characters based on user input
+  // Push new random numeric character to guaranteedCharacters
   if (options.hasNumericCharacters) {
     possibleCharacters = possibleCharacters.concat(numericCharacters);
-    guaranteedCharacters = push(getRandom(numericCharacters));
+    guaranteedCharacters.push(getRandom(numericCharacters));
   }
 
-  // Condition statement that adds array of special characters into array of possible characters based on user input
-  // Push new random special character to guaranteedCharacters
-  if (options.hasLowerCaseCharacters) {
+  // Condition statement that adds array of lowercase characters into array of possible characters based on user input
+  // Push new random lowercase character to guaranteedCharacters
+  if (options.hasLowerCasedCharacters) {
     possibleCharacters = possibleCharacters.concat(lowerCasedCharacters);
-    guaranteedCharacters = push(getRandom(lowerCasedCharacters));
+    guaranteedCharacters.push(getRandom(lowerCasedCharacters));
   }
 
-  // Condition statement that adds array of special characters into array of possible characters based on user input
-  // Push new random special character to guaranteedCharacters
-  if (options.hasUpperCaseCharacters) {
+  // Condition statement that adds array of uppercase characters into array of possible characters based on user input
+  // Push new random uppercase character to guaranteedCharacters
+  if (options.hasUpperCasedCharacters) {
     possibleCharacters = possibleCharacters.concat(upperCasedCharacters);
-    guaranteedCharacters = push(getRandom(upperCasedCharacters));
+    guaranteedCharacters.push(getRandom(upperCasedCharacters));
   }
 
   // For loop to iterate over the password length from the options object, selecting random indices from the array of possible characters
   for (var i = 0; i < options.length; i++) {
-    var possibleCharacters = getRandom(possibleCharacters);
+    var possibleCharacter = getRandom(possibleCharacters);
   
-    results.push(possibleCharacters);
+    result.push(possibleCharacter);
   }
 
   // Mix in at least one of each guaranteed character in the result
   for (var i = 0; i < guaranteedCharacters.length; i++) {
-    result[i]; guaranteedCharacters[i];
+    result[i] = guaranteedCharacters[i];
 
   // Transform the result of into a string and pass into withPassword
-  return results.join('');
+  return result.join('');
+	}
 }
-
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -229,7 +231,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
